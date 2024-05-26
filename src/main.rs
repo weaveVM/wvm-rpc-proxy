@@ -11,10 +11,7 @@ use serde_json::Value;
 use std::net::SocketAddr;
 use std::sync::Arc;
 use tokio::sync::Mutex;
-use std::env;
-use dotenv::dotenv;
-use std::str::FromStr;
-
+use shuttle_axum::ShuttleAxum;
 
 #[derive(Serialize, Deserialize, Debug)]
 struct RpcRequest {
@@ -37,8 +34,10 @@ struct AppState {
     eth_rpc_url: String,
 }
 
-#[tokio::main]
-async fn main() {
+#[shuttle_runtime::main]
+async fn main() -> ShuttleAxum {
+    dotenv::dotenv().ok();
+
     let client = Client::new();
     let eth_rpc_url = "http://34.141.88.80:8545".to_string();
 
@@ -47,14 +46,12 @@ async fn main() {
     let app = Router::new()
         .route("/rpc", post(handle_rpc_request))
         .with_state(shared_state);
-    let port: u16 = std::env::var("PORT").unwrap_or(String::from("8888")).parse().expect("invalid port");
+
+    let port: u16 = std::env::var("PORT").unwrap_or_else(|_| "8888".to_string()).parse().expect("invalid port");
     let addr = SocketAddr::from(([0, 0, 0, 0], port));
     println!("Server running on {}", addr);
 
-    axum::Server::bind(&addr)
-        .serve(app.into_make_service())
-        .await
-        .unwrap();
+    Ok(app.into())
 }
 
 async fn handle_rpc_request(
