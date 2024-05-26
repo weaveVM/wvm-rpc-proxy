@@ -1,5 +1,5 @@
 [package]
-name = "shuttle_rs_example"
+name = "wvm-proxy-rpc"
 version = "0.1.0"
 edition = "2021"
 

@@ -47,10 +47,6 @@ async fn main() -> ShuttleAxum {
         .route("/", post(handle_rpc_request))
         .with_state(shared_state);
 
-    // let port: u16 = std::env::var("PORT").unwrap_or_else(|_| "8888".to_string()).parse().expect("invalid port");
-    // let addr = SocketAddr::from(([0, 0, 0, 0], port));
-    // println!("Server running on {}", addr);
-
     Ok(app.into())
 }
 

@@ -1557,20 +1557,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "shuttle_rs_example"
-version = "0.1.0"
-dependencies = [
- "axum 0.7.5",
- "dotenv",
- "reqwest",
- "serde",
- "serde_json",
- "shuttle-axum",
- "shuttle-runtime",
- "tokio",
-]
-
-[[package]]
 name = "signal-hook"
 version = "0.3.17"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2368,6 +2354,20 @@ checksum = "524e57b2c537c0f9b1e69f1965311ec12182b4122e45035b1508cd24d2adadb1"
 dependencies = [
  "cfg-if",
  "windows-sys 0.48.0",
+]
+
+[[package]]
+name = "wvm-proxy-rpc"
+version = "0.1.0"
+dependencies = [
+ "axum 0.7.5",
+ "dotenv",
+ "reqwest",
+ "serde",
+ "serde_json",
+ "shuttle-axum",
+ "shuttle-runtime",
+ "tokio",
 ]
 
 [[package]]
