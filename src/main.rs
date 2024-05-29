@@ -8,7 +8,6 @@ use axum::{
 use reqwest::Client;
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
-use std::net::SocketAddr;
 use std::sync::Arc;
 use tokio::sync::Mutex;
 use shuttle_axum::ShuttleAxum;
@@ -31,7 +30,7 @@ struct RpcResponse {
 
 struct AppState {
     client: Client,
-    eth_rpc_url: String,
+    wvm_rpc_url: String,
 }
 
 #[shuttle_runtime::main]
@@ -39,9 +38,9 @@ async fn main() -> ShuttleAxum {
     dotenv::dotenv().ok();
 
     let client = Client::new();
-    let eth_rpc_url = "http://34.141.88.80:8545".to_string();
+    let wvm_rpc_url = "http://34.141.88.80:8545".to_string();
 
-    let shared_state = Arc::new(Mutex::new(AppState { client, eth_rpc_url }));
+    let shared_state = Arc::new(Mutex::new(AppState { client, wvm_rpc_url }));
 
     let app = Router::new()
         .route("/", post(handle_rpc_request))
@@ -58,7 +57,7 @@ async fn handle_rpc_request(
 
     let response = state
         .client
-        .post(&state.eth_rpc_url)
+        .post(&state.wvm_rpc_url)
         .json(&req)
         .send()
         .await
