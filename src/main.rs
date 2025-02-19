@@ -38,7 +38,7 @@ async fn main() -> ShuttleAxum {
     dotenv::dotenv().ok();
 
     let client = Client::new();
-    let wvm_rpc_url = "http://34.141.88.80:8545".to_string();
+    let wvm_rpc_url = "https://testnet-rpc.wvm.dev".to_string();
 
     let shared_state = Arc::new(Mutex::new(AppState { client, wvm_rpc_url }));
 

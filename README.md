@@ -14,7 +14,7 @@ git clone https://github.com/weavevm/wvm-proxy-rpc.git
 
 cd wvm-proxy-rpc
 
-cargo build && cargo shuttle run --port 3000
+shuttle run
 ```
 
 ## Networks
@@ -27,12 +27,12 @@ cargo build && cargo shuttle run --port 3000
 ## Usage example
 
 ```bash
-curl -X POST https://wvm-rpc-proxy.shuttleapp.rs/ -H "Content-Type: application/json" -d '{"jsonrpc":"2.0","method":"eth_chainId","params":[],"id":1}'
+curl -X POST https://testnet.wvm.dev -H "Content-Type: application/json" -d '{"jsonrpc":"2.0","method":"eth_chainId","params":[],"id":1}'
 ```
 #### Local build
 
 ```bash
-curl -X POST http://localhost:3000 -H "Content-Type: application/json" -d '{"jsonrpc":"2.0","method":"eth_chainId","params":[],"id":1}'
+curl -X POST https://testnet.wvm.dev -H "Content-Type: application/json" -d '{"jsonrpc":"2.0","method":"eth_chainId","params":[],"id":1}'
 ```
 
 ## License
